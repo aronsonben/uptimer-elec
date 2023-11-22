@@ -1,0 +1,32 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+}
+
+#logtable {
+  width: 35rem;
+  background-color: salmon;
+}
+
+#timecol {
+  display: inline-block;
+  width: 5rem;
+  background-color: aqua;
+}
+
+#goalcol {
+  display: inline-block;
+  width: 10rem;
+  margin-left: 10px;
+  background-color:blanchedalmond;
+}
+
+#notecol {
+  display: inline-block;
+  width: 14rem;
+  margin-left: 10px;
+  background-color: brown;
+}

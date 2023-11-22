@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Uptimer</title>
+
+  </head>
+  <body>
+    <h1>💖 Hello World!</h1>
+    <p>Welcome to your Electron application.</p>
+    <p id="info"></p>
+    <button id="starttimer">start</button>
+    File path: <strong id="filePath"></strong>
+    <button id="readdata">read</button>
+    Data: <span id="dataspan"></span>
+    <form>
+      <label>Goal:</label><br>
+      <input type="text" id="goal" name="goal">
+      <button>go</button>
+    </form>
+    <br><hr><br>
+    <div id="logtable">
+      <div id="logrow">
+        <span id="timecol">time</span>
+        <span id="goalcol">goal</span>
+        <span id="notecol">note</span>
+      </div>
+    </div>
+  </body>
+  <script src="./renderer.js"></script>
+</html>
