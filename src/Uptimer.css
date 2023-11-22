@@ -101,6 +101,11 @@ a:hover {
   align-items: center;
 }
 
+.goalZone form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .goalButtons button {
   background-color: white;
@@ -120,6 +125,12 @@ a:hover {
 .goalButton button:hover {
   transform: scale(1.05);
   opacity: 1;
+}
+
+.goalInputErrorMsg {
+  color: rgb(87, 19, 19);
+  font-size: 11px;
+  text-align: center;
 }
 
 #grayBtn {

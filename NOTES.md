@@ -13,6 +13,9 @@ Helpful Links:
 - https://www.reddit.com/r/electronjs/comments/10dh3lz/what_is_the_proper_way_to_permanently_store_data/
 - https://stackoverflow.com/questions/75844516/user-save-progress-to-file-in-electron-react-app
 
+GITHUB_TOKEN needs to be set in shell, not in .env:
+- https://github.com/electron/forge/issues/3221
+
 ## to do
 
 /initial
@@ -26,14 +29,20 @@ Helpful Links:
 [ x ] fix unique id issue
 [ x ] clean up UI
 
-/v0_fin
+/v0.1.0
 [ x ] fix scroll issue
-[ ] learn how to package
-[ ] upload to github
+[ x ] learn how to package
+[ x ] upload to github
 
-/pt3
-[ ] reset timer on new goal
-[ ] start without goal behavior
+/v0.1.1
+[ x ] reset timer on new goal
+[ x ] start without goal behavior
+-- extras
+[ x ] allowed 'enter' to start goal
+[ x ] condensed goal form to one button
+
+/v0.1.2 (future)
+[ ] clear log
 
 / later
 [ ] allow notes to be added

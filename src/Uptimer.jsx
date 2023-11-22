@@ -15,6 +15,7 @@ export function LogItem({ task, header }) {
 
 export default function Uptimer() {
   const [goalInput, setGoal] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [logData, setLogData] = useState([]);
   const [nextIndex, setNextIndex] = useState(0);
   const [fetchIfTrue, setFetch] = useState(false);
@@ -81,12 +82,18 @@ export default function Uptimer() {
     setGoal(e.target.value);
   }
 
-  function handleStart() {
+  function handleStart(e) {
+    e.preventDefault();
+    if (!goalInput) {
+      console.log('You must enter a task goal.');
+      setIsSubmitting(true);
+      return null;
+    }
     start();
-    console.log(goalInput);
   }
 
-  const handleStop = async () => {
+  const handleStop = async (e) => {
+    e.preventDefault();
     pause();
 
     console.log(logData);
@@ -103,6 +110,9 @@ export default function Uptimer() {
     // reset rendered data
     setNextIndex(nextIndex+1);
     setGoal('');
+    setIsSubmitting(false);
+    reset();
+    pause();
   }
 
   return (
@@ -114,20 +124,29 @@ export default function Uptimer() {
       </div>
       <div className="goalZone">
         <h3>Set Goal:</h3>
-        <input
-          placeholder="Task Goal"
-          type="text"
-          className="taskGoal"
-          value={goalInput}
-          onChange={handleGoalChange}
-        />
-        <div className="goalButtons">
-          <button id="start-button" onClick={handleStart}>Go!</button>
-          <button type="button" onClick={isRunning ? handleStop : null} 
-            id={isRunning ? "regBtn" : "grayBtn"}>
-              Stop
-          </button>
-        </div>
+        <form action={(e) => handleStart(e)}>
+          <input
+            placeholder="Task Goal"
+            type="text"
+            className="taskGoal"
+            value={goalInput}
+            onChange={handleGoalChange}
+          />
+          <div className="goalButtons">
+            <button id="start-button" onClick={isRunning ? 
+              (e) => handleStop(e) : 
+              (e) => handleStart(e)} >
+              {isRunning ? "Stop" : "Go!" }
+            </button>
+          </div>
+        </form>
+        { !goalInput && isSubmitting ? 
+            (<span className="goalInputErrorMsg">
+              You should specify what the goal for your task is. <br />
+              For now, the task will be logged as undefined.
+            </span>)
+            :
+            ''}
       </div>
       <div className="timerZone">
         <div style={{ fontSize: '35px' }}>
