@@ -6,12 +6,13 @@
   position: relative;
   color: white;
   height: 100%;
-  background: linear-gradient(
+  /* background: linear-gradient(
     200.96deg,
     #fedc2a -29.09%,
     #dd5789 51.77%,
     #7a2c9e 129.35%
-  );
+  ); */
+  background: steelblue;
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
@@ -65,6 +66,14 @@ a:hover {
   text-decoration: none;
 }
 
+#mainHdr {
+  background-color: rgb(84, 84, 84);
+  margin-top: -52px; /* super wack; hack to get it at top */
+  padding: 50px 100vw;
+  font-size: 36px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .Uptimer {
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +116,7 @@ a:hover {
   align-items: center;
 }
 
-.goalButtons button {
+button {
   background-color: white;
   padding: 5px 10px;
   border-radius: 10px;
@@ -149,8 +158,54 @@ a:hover {
 }
 
 .timerZone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   margin: 35px 0 35px 0;
+  border: solid 1px black;
+  padding: 35px 20vw 35px 20vw;
+}
+
+#timerTitle {
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+#logzone {
+  width: 60vw;
+}
+
+.logHeadZone {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.logHeadZone h2 {
+  width: 66%;
+  margin: 0px;
+  margin-left: 10px;
+}
+
+.clearBtnDiv {
+  width: 33%;
+  text-align: right;
+}
+
+#clearBtn {
+  font-size: 10px;
+  background-color: rgb(232, 230, 230);
+  margin: 0 10px 0 0px;
+}
+
+#clearBtn:hover {
+  background-color: white;
+  font-size: 11px;
+  transition: all ease-in 0.1s;
 }
 
 .logTable {
@@ -160,10 +215,14 @@ a:hover {
   margin: 20px 0;
 }
 
+.logList {
+  margin: 0px;
+}
+
 .logItem {
   display: block;
-  width: 30em;
-  margin: 10px;
+  width: 100%;
+  margin: 0px;
   font-size: 15px;
   border-radius: 10px;
   background-color: whitesmoke;
@@ -179,6 +238,7 @@ a:hover {
   /* cursor: pointer; */
   opacity: 0.9;
   margin: 10px;
+  margin-left: 0px;
 }
 
 .logItem:hover {
@@ -187,12 +247,14 @@ a:hover {
 }
 
 .logHeader {
+  margin: 0px;
   font-weight: bold;
+  /* text-align: center; */
 }
 
 .logTime {
   display: inline-block;
-  width: 30%;
+  width: 20%;
   padding: 10px 15px 10px 15px;
   border-right: lightgray 1px solid;
 }
@@ -208,4 +270,16 @@ a:hover {
   display: inline-block;
   width: 25%;
   padding: 10px 15px 10px 15px;
+  border-right: lightgray 1px solid;
+}
+
+.logEdit {
+  display: inline-block;
+  width: 10%;
+}
+
+.logEdit button {
+  color: darkslategray;
+  font-size: 12px;
+  border: 1px solid darkslategray;
 }

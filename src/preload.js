@@ -13,7 +13,8 @@ contextBridge.exposeInMainWorld('versions', {
 contextBridge.exposeInMainWorld('electronAPI', {
   openFile: () => ipcRenderer.invoke('dialog:openFile'),
   readLogData: () => ipcRenderer.invoke('fs:readLogData'),
-  saveData: (data) => ipcRenderer.invoke('saveData', data),
+  clearLogData: () => ipcRenderer.invoke('fs:clearLogData'),
+  saveData: (data, one) => ipcRenderer.invoke('saveData', data, one),
   // fetchLogs: (callback) => ipcRenderer.on('fetchLogs', callback),
-  fetchLogs: () => ipcRenderer.invoke('fetchLogs')
+  fetchLogs: () => ipcRenderer.invoke('fetchLogs'),
 })

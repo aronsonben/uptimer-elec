@@ -26,11 +26,6 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-
-  // Fetch existing log data (ben)
-  // let data = readLogData();
-  // console.log(data);
-  // mainWindow.webContents.send('fetchLogs', readLogData());
 };
 
 // This method will be called when Electron has finished
@@ -41,6 +36,7 @@ app.whenReady().then(() => {
   ipcMain.handle('ping', () => 'pong')
   ipcMain.handle('dialog:openFile', handleFileOpen)
   ipcMain.handle('fs:readLogData', readLogData)
+  ipcMain.handle('fs:clearLogData', clearLogData)
   ipcMain.handle('saveData', saveLogData)
   ipcMain.handle('fetchLogs', readLogData)
   createWindow()
@@ -91,8 +87,76 @@ function readLogData() {
   }
 }
 
+function clearLogData() {
+  try {
+    // fetch log data JSON
+    const taskLog = fs.readFileSync(USER_DATA_PATH, 'utf-8');
+    let taskLogJson = JSON.parse(taskLog);
+    
+    // clear taskLog array
+    taskLogJson.taskLog = [];
+    console.log(taskLogJson);
+
+    // save file
+    const saveNew = fs.writeFileSync(USER_DATA_PATH, JSON.stringify(taskLogJson));
+    console.log(saveNew);
+
+    return taskLogJson;
+  } catch(error) {
+    console.log('Error retrieving user data', error);  
+    // you may want to propagate the error, up to you
+    return null;
+  }
+}
+
+// Helper function to check object type
+const isObject = a => a != null && a.constructor === Object;
+
 // Saves new log data to the user_data.json file
-async function saveLogData(event, logData) {
+async function saveLogData(event, logData, one) {
+  try {
+    // read file first to get existing JSON obj
+    let existingData = fs.readFileSync(USER_DATA_PATH, 'utf-8');
+    let existingJson = JSON.parse(existingData);
+
+    let save = null; 
+    // if 'one', logData should be a single task obj
+    if(one) {
+      // make sure logData is an object
+      if(!isObject(logData)) {
+        console.log('error. wrong datatype/');
+        return false;
+      }
+      // find log to be edited
+      existingJson.taskLog.forEach(element => {
+        if(element.id == logData.id) {
+          // replace element with new logData obj
+          element.goal = logData.goal;
+          element.note = logData.note;
+          return;
+        }
+      });
+      // save to file
+      // console.log(existingJson);
+      save = fs.writeFileSync(USER_DATA_PATH, JSON.stringify(existingJson));
+    } else {
+      // append new data to existing data
+      existingJson.taskLog.push(logData);
+      let newJson = JSON.stringify(existingJson);
+
+      save = fs.writeFileSync(USER_DATA_PATH, newJson);
+    }
+  
+    return save;
+  } catch(error) {
+    console.log('Error retrieving user data', error);  
+    // should change this
+    return null;
+  }
+}
+
+// Save only one specific task that has been edited
+async function saveOneLog(event, logData) {
   try {
     // read file first to get existing JSON obj
     let existingData = fs.readFileSync(USER_DATA_PATH, 'utf-8');
@@ -105,7 +169,7 @@ async function saveLogData(event, logData) {
     const save = fs.writeFileSync(USER_DATA_PATH, newJson)
 
     return save;
-  } catch ( error ) {
+  } catch(error) {
     console.log('Error retrieving user data', error);  
     // should change this
     return null;

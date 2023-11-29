@@ -20,6 +20,12 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {},
     },
+    {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        format: 'ULFO'
+      },
+    },
   ],
   publishers: [
     {
@@ -29,7 +35,7 @@ module.exports = {
           owner: 'aronsonben',
           name: 'uptimer'
         },
-        prerelease: false
+        prerelease: false,
       }
     }
   ],
